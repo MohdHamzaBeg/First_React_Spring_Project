@@ -1,5 +1,6 @@
 package com.springframework.react.TheDivineCollections.service;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,16 @@ public class ItemServiceImpl implements ItemService {
 			item.setId(random.nextInt());
 		itemRepository.save(item);
 		
+	}
+
+	@Override
+	public List<Item> listofItems() {
+		return itemRepository.findAll();
+	}
+
+	@Override
+	public Item getbyId(int id) {
+		return itemRepository.findById(id).orElse(null);
 	}
 	
 	

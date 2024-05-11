@@ -1,5 +1,6 @@
 package com.springframework.react.TheDivineCollections.service;
 
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,15 @@ public class UserServiceImpl implements UserService {
 		if(user.getId()==0)
 			user.setId(random.nextInt());
 		userRepository.save(user);
+	}
+
+	@Override
+	public User getUserbyId(String email, String password) {
+		User founduser = userRepository.findByEmailAndPassword(email, password);
+		if(founduser!=null)
+		return founduser;
+		else
+		return null;
+			
 	}
 }

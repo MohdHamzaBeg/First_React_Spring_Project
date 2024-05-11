@@ -3,6 +3,7 @@ package com.springframework.react.TheDivineCollections.model;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -32,14 +33,15 @@ public class Item {
 	@Size(max=50)
 	private String name;
 	
+	@Column(length = 1000)
 	private String description;
 	
-	@NotNull
-	@NotEmpty
+	//@NotNull
+	//@NotEmpty
 	private int age;
 	
-	@NotNull
-	@NotEmpty
+	//@NotNull
+	//@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User owner;
