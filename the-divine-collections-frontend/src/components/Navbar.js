@@ -7,10 +7,13 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          items: []
+          loguser: {}
         };
     }
     componentDidMount(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.setState({loguser: user})
+        // Use the user data
         setTimeout(() => {
             this.setState({ showHeading: true });
           }, 500); 
@@ -33,10 +36,10 @@ export default class Navbar extends Component {
                                 <Link className="nav-link" to="/categories">Categories</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={`nav-link ${this.props.user!=null ? "" : "disabled"}`} aria-disabled="true">Your Items</Link>
+                                <Link className={`nav-link ${this.state.loguser!=null ? "" : "disabled"}`} to='/youritems'>Your Items</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link disabled" aria-disabled="true">Your Bids</Link>
+                                <Link className={`nav-link ${this.state.loguser!=null ? "" : "disabled"}`} >Your Bids</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

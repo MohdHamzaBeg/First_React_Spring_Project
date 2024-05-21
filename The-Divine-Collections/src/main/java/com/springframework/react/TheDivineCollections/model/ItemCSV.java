@@ -21,5 +21,11 @@ public class ItemCSV {
 	private Integer age;
 	
 	@CsvBindByName
+	private Integer bid;
+	
+	@CsvBindByName
+	private Integer user_id;
+	
+	@CsvBindByName
 	private String description;
 }

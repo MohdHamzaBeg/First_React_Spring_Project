@@ -20,6 +20,7 @@ class Home extends Component {
                 return response.json();
             })
             .then(data => {
+              console.log(data)
                 this.setState({ items: data.slice(0,8) });
             })
             .catch(error => {

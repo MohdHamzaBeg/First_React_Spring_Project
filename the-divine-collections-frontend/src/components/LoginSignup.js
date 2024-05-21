@@ -10,7 +10,6 @@ export default class LoginSignup extends Component {
             password: '',
             confirmPassword: '',
             isLogin: true,
-            user:{}
         };
     }
     
@@ -24,28 +23,22 @@ export default class LoginSignup extends Component {
         const {name, email,number, password} = this.state 
         if (this.state.isLogin) {
             // Handle login
-                
             fetch(`http://localhost:8080/getuser/${this.state.email}/${this.state.password}`)
             .then(response => {
-                if (response.ok) {
-                    return response.json;
-                   
-                }
-                else{ 
-                    alert("The entered username or password is incorrect. Kindly check it and try again later")
+                if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-               
+                return response.json();
             })
             .then(data => {
-                this.setState({ user: data });
-                window.location.href='/'
+                localStorage.setItem('user', JSON.stringify(data));
+                window.location.href = '/';
             })
             .catch(error => {
-                console.error('Error fetching items: ', error);
-                
-                
+                console.error('Error logging in: ', error);
+                alert("The entered username or password is incorrect. Kindly check it and try again later");
             });
+            
         } else {
             // Handle signup
             const userData = {name, email,number, password}
@@ -87,7 +80,7 @@ export default class LoginSignup extends Component {
                                 <h2>{this.state.isLogin ? 'Login' : 'Sign Up'}</h2>
                             </div>
                             <div className="card-body">
-                                <form onSubmit={this.handleSubmit} method='post'>
+                                <form onSubmit={this.handleSubmit}>
                                     <table className="table table-bordered">
                                         <tbody>
                                         {!this.state.isLogin && (
@@ -97,7 +90,7 @@ export default class LoginSignup extends Component {
                                                 </tr>
                                             )}
                                             <tr>
-                                                <td style={{backgroundColor:'#ADD8E6'}}>Email address:</td>
+                                                <td style={{backgroundColor:'#ADD8E6'}}>Email address: </td>
                                                 <td><input type="email" className="form-control" name="email" value={this.state.email} onChange={this.handleChange} required /></td>
                                             </tr>
                                             {!this.state.isLogin && (

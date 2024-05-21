@@ -1,5 +1,6 @@
 package com.springframework.react.TheDivineCollections.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,5 +47,5 @@ public class User {
 	private List<Item> mybids;
 	
 	@OneToMany(mappedBy = "owner")
-	private List<Item> myitems;
+	private List<Item> myitems ;
 }

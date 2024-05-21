@@ -21,7 +21,8 @@ export default class Categories extends Component {
                 return response.json();
             })
             .then(data => {
-                this.setState({ items: data.slice(0,50) });
+              console.log(data)
+                this.setState({ items: data });
             })
             .catch(error => {
                 console.error('Error fetching items: ', error);
@@ -29,7 +30,7 @@ export default class Categories extends Component {
       }
 
 
-  render() {
+  render() { 
     return (
         <>
         <h3 className='display-6 my-3'> Categories:-</h3>
@@ -82,7 +83,7 @@ export default class Categories extends Component {
             <h5 className="card-title">{item.name}</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} BC</h6>
             <p className="card-text">{item.description.slice(0, 20) + "......."}</p>
-            <a href="#" className="btn btn-primary">Bid Now</a>
+            <Link to={`/items/${item.id}`} className="btn btn-primary">Bid Now</Link>
           </div>
         </div>
       </div>
@@ -109,7 +110,7 @@ export default class Categories extends Component {
             <h5 className="card-title">{item.name}</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} BC</h6>
             <p className="card-text">{item.description.slice(0, 20) + "......."}</p>
-            <Link href="" className="btn btn-primary">Bid Now</Link>
+            <Link to={`/items/${item.id}`} className="btn btn-primary">Bid Now</Link>
           </div>
         </div>
       </div>
