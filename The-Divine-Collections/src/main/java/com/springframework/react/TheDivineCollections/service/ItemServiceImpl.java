@@ -52,7 +52,11 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void updateBidbyId(int itemid, int newBid, int userid) {
 		Item item = (Item) itemRepository.findById(itemid).get();
-		item.getBids().put(newBid, userRepository.findById(userid).orElse(null));
+		User user = userRepository.findById(userid).orElse(null);
+		if(item.getBids().containsValue(user)) {
+		item.getBids().remove(item.getBid());
+		}
+		item.getBids().put(newBid, user);
 		item.setBid(newBid);
 		itemRepository.save(item);
 	}

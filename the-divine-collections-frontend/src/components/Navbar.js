@@ -39,7 +39,7 @@ export default class Navbar extends Component {
                                 <Link className={`nav-link ${this.state.loguser!=null ? "" : "disabled"}`} to='/youritems'>Your Items</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={`nav-link ${this.state.loguser!=null ? "" : "disabled"}`} >Your Bids</Link>
+                                <Link className={`nav-link ${this.state.loguser!=null ? "" : "disabled"}`} to='/yourbids'>Your Bids</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

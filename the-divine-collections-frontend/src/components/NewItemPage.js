@@ -35,8 +35,7 @@ export default class NewItemPage extends Component {
         })
         .then(data => {
             alert("Item Saved Successfully!")
-            //window.location.href = '/youritems';
-            // Optionally, you can redirect the user to a new page or perform some action upon successful signup
+            window.location.href = '/youritems';
         })
         .catch(error => {
             console.error('Error saving item: ', error);

@@ -12,10 +12,10 @@ import {
 } from "react-router-dom";
 import UserItems from './components/UserItems';
 import NewItemPage from './components/NewItemPage';
+import UserBids from './components/UserBids';
 
 class App extends Component {
-  // START THE PROJECT FRESH BY CHANGING THE VALIDATION FROM BACKEND. THEN CHECK ALL THE FUNCTIONALITIES
-  // THAT HAS BEEN DEVELOPED TILL YET. AFTER THAN MOVE ON TO MYBIDS PART
+  // TRY ADDING THE DELETE YOUR ITEM AND DELETE YOUR BID LOGIC BUT THIS TIME IN A MUCH BETTER WAY
   render() {
     return (
       
@@ -29,6 +29,7 @@ class App extends Component {
             <Route exact path='/signuplogin' element={<LoginSignup />} />
             <Route exact path='/youritems' element={<UserItems />} />
             <Route exact path='/newItem' element={<NewItemPage />} />
+            <Route exact path='/yourbids' element={<UserBids />} />
           </Routes>
         </Router>
       </>

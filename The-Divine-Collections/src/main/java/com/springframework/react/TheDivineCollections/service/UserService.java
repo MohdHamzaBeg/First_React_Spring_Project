@@ -13,4 +13,6 @@ public interface UserService {
 	User getUserbyId(String email, String password);
 	
 	List<ItemProjection> gibui(int id);
+
+	List<ItemProjection> userBids(int id);
 }

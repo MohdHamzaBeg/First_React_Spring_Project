@@ -51,4 +51,12 @@ public class UserController {
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	@GetMapping("userBidsbyId/{id}")
+	public ResponseEntity<List<ItemProjection>> getuserBidbyUserId(@PathVariable int id){
+		List<ItemProjection> userBids = userService.userBids(id);
+		if(!userBids.isEmpty())
+			return new ResponseEntity<>(userBids, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 }

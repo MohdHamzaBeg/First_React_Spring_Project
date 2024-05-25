@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUserId(id);
 		
 	}
+
+	@Override
+	public List<ItemProjection> userBids(int id) {
+		return userRepository.findBidsByUserId(id);
+	}
 }
