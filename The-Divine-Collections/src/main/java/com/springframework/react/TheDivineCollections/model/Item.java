@@ -51,5 +51,7 @@ public class Item {
 	@ManyToMany
 	private Map<Integer, User> bids;
 	
+	private List<Integer> listofbids;
+	
 	
 }

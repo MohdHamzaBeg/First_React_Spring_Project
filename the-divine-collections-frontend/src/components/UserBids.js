@@ -7,11 +7,12 @@ export default class UserBids extends Component {
     this.state = {
         items: [],
         error: null
-    }; 
+    };
   }
-
+  
   componentDidMount(){
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     fetch(`http://localhost:8080/userBidsbyId/${user.id}`)
       .then(response => {
         if (response.ok) {
@@ -28,6 +29,26 @@ export default class UserBids extends Component {
       .catch(error => {
         console.error('Error fetching items: ', error);
       });
+  }
+
+  handleWithdraw = (itemId) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    fetch(`http://localhost:8080/deleteuserBid/${itemId}/${user.id}`)
+    .then(response => {
+      if (response.ok) {
+        this.setState({ items : null })
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .then(() => {
+      alert("Your Bid has been withdrew!")
+    })
+    .catch(error => {
+      console.error('Error removing bid ', error);
+    });
+    window.location.href = '/yourbids'
   }
 
   render() {
@@ -58,7 +79,8 @@ export default class UserBids extends Component {
                   <td>{item.age} Years</td>
                   <td>{item.description.slice(0, 30) + "..."}</td>
                   <td>
-                    <Link to={`/items/${item.id}`} className="btn btn-primary">Bid Again!</Link>
+                    <Link to={`/items/${item.id}`} className="btn btn-primary" style={{ marginRight: '10px' }}>Bid Again!</Link>
+                    <button onClick={() => this.handleWithdraw(item.id)} className="btn btn-danger">Withdraw</button>
                   </td>
                 </tr>
               )) : (

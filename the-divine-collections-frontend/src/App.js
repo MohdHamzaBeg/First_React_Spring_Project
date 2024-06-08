@@ -3,8 +3,10 @@ import './App.css';
 import Categories from './components/Categories';
 import Home from './components/Home';
 import Item from './components/Item';
+import ContactUs from './components/ContactUs';
 import LoginSignup from './components/LoginSignup';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,7 +17,8 @@ import NewItemPage from './components/NewItemPage';
 import UserBids from './components/UserBids';
 
 class App extends Component {
-  // TRY ADDING THE DELETE YOUR ITEM AND DELETE YOUR BID LOGIC BUT THIS TIME IN A MUCH BETTER WAY
+  // RESETTING THE BID VALUE FOR THAT ITEM UPON DELETION IS WORKING. CHECK IT ONCE
+  // START RESOLVING THE TODO LIST
   render() {
     return (
       
@@ -30,7 +33,9 @@ class App extends Component {
             <Route exact path='/youritems' element={<UserItems />} />
             <Route exact path='/newItem' element={<NewItemPage />} />
             <Route exact path='/yourbids' element={<UserBids />} />
+            <Route exact path='/contactus' element={<ContactUs/>} />
           </Routes>
+          <Footer/>
         </Router>
       </>
     );

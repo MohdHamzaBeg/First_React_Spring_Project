@@ -12,6 +12,7 @@ export default class Navbar extends Component {
     }
     componentDidMount(){
         const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
         this.setState({loguser: user})
         // Use the user data
         setTimeout(() => {
@@ -21,7 +22,7 @@ export default class Navbar extends Component {
     render() {
         return (
             <>
-            <nav className="navbar navbar-expand-lg "style={{ backgroundColor: '#ADD8E6' }} >
+            <nav className="navbar navbar-expand-lg "style={{ backgroundColor: '#66b2ff' }} >
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="#">Auction</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +48,7 @@ export default class Navbar extends Component {
                             <Link className="nav-link" to="/signuplogin">Login / Signup</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="">Contact Us</Link>
+                                <Link className="nav-link" to="/contactus">Contact Us</Link>
                             </li>
                         </ul>
 

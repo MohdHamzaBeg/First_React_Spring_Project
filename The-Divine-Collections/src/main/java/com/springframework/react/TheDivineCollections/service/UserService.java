@@ -15,4 +15,6 @@ public interface UserService {
 	List<ItemProjection> gibui(int id);
 
 	List<ItemProjection> userBids(int id);
+
+	void removeBid(int itemid, int userid);
 }

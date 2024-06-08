@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +59,17 @@ public class UserController {
 			return new ResponseEntity<>(userBids, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	@GetMapping("/deleteuserBid/{itemid}/{userid}")
+	public ResponseEntity<Item> removeUserBid(@PathVariable("itemid") int itemid,
+    									  	 @PathVariable("userid") int userid){
+		try {
+    		userService.removeBid(itemid, userid);
+    		return new ResponseEntity<>(HttpStatus.OK);
+    	}
+    	catch(Exception e) {
+    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    	
+    	}
 	}
 }

@@ -1,6 +1,8 @@
 package com.springframework.react.TheDivineCollections.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -26,12 +28,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void saveItem(Item item) {
 		if(item.getBids()==null)
-		item.setBids(new HashMap<Integer, User>());
+		item.setBids(new LinkedHashMap<Integer, User>());
+		
+		if(item.getListofbids()==null)
+		item.setListofbids(new ArrayList<Integer>());
 		
 		Random random = new Random();
 		if(item.getId()==0)
 			item.setId(random.nextInt());
 		item.getBids().put(item.getBid(), item.getOwner());
+		item.getListofbids().add(item.getBid());
 		itemRepository.save(item);
 		
 	}
@@ -57,8 +63,19 @@ public class ItemServiceImpl implements ItemService {
 		item.getBids().remove(item.getBid());
 		}
 		item.getBids().put(newBid, user);
+		
+		// Adding Bid for personal convenience
+		if(item.getListofbids()==null)
+			item.setListofbids(new ArrayList<Integer>());
+		item.getListofbids().add(newBid);
 		item.setBid(newBid);
 		itemRepository.save(item);
+	}
+
+	@Override
+	public void deletebyitemId(int id) {
+		itemRepository.deleteById(id);
+		
 	}
 	
 	

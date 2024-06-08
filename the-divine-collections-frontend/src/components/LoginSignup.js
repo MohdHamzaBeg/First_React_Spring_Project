@@ -20,7 +20,7 @@ export default class LoginSignup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {name, email,number, password} = this.state 
+        const {name, email,number, password, confirmPassword} = this.state 
         if (this.state.isLogin) {
             // Handle login
             fetch(`http://localhost:8080/getuser/${this.state.email}/${this.state.password}`)
@@ -41,7 +41,11 @@ export default class LoginSignup extends Component {
             
         } else {
             // Handle signup
-            const userData = {name, email,number, password}
+            const userData = {name, email,number, password,confirmPassword}
+            if(password!==confirmPassword){
+                alert("Password do not match! Please try again.")
+                return;
+            }
             const confirmation = window.confirm('Are you sure with the details and want to save?')
             if(confirmation){
             fetch('http://localhost:8080/saveUser', {

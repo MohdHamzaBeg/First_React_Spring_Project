@@ -14,4 +14,6 @@ public interface ItemService {
 	ItemProjection getbyId(int id);
 
 	void updateBidbyId(int itemid, int newBid, int user);
+
+	void deletebyitemId(int id);
 }
