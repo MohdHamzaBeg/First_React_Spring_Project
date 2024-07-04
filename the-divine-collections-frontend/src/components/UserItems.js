@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import a1 from '../images/a1.jpeg'
 
 export default class UserItems extends Component {
     constructor(props) {
@@ -66,6 +67,12 @@ export default class UserItems extends Component {
                         {this.state.items.map(item => (
                             <div className="col-md-4 mb-4" key={item.id}>
                                 <div className="card mx-3 my-2">
+                                <img
+                                src={a1}
+                                className="card-img-top"
+                                alt={item.name}
+                                onError={(e) => e.target.src = '../images/default.jpeg'} // Fallback to default image on error
+                  />
                                     <div className="card-body" style={{ backgroundColor: '#ADD8E6' }}>
                                         <h5 className="card-title">{item.name}</h5>
                                         <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} Years</h6>

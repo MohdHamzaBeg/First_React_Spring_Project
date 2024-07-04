@@ -57,13 +57,14 @@ export default class LoginSignup extends Component {
                 .then(response => { 
                     if (!response.ok) {
                         alert("User already exists! Please try a different one.");
-                        return;
                     }
+                    else{
+                        alert("User saved! Please login now.");
+                    window.location.href = '/signuplogin';
                     return response.json();
+                    }
                 })
                 .then(data => {
-                    alert("User saved! Please login now.");
-                    window.location.href = '/signuplogin';
                 })
                 .catch(error => {
                     console.error('Error saving user: ', error);
