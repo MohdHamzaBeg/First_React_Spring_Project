@@ -26,14 +26,17 @@ public class UserServiceImpl implements UserService {
 	private ItemRepository itemRepository;
 
 	@Override
-	public void saveUser(User user) {
+	public User saveUser(User user) {
+		if(userRepository.findByNumber(user.getNumber())!=null)
+			return null;
 		if(user.getMyitems()==null)
 			user.setMyitems(new ArrayList<>());
 		
 		Random random = new Random();
 		if(user.getId()==0)
 			user.setId(random.nextInt());
-		userRepository.save(user);
+		User savedUser = userRepository.save(user);
+		return savedUser;
 	}
 
 	@Override
@@ -77,8 +80,13 @@ public class UserServiceImpl implements UserService {
 		System.out.println("reached");
 			
 		item.setBid(item.getListofbids().get(item.getListofbids().size()-1));
-		user.setMybids(null);
-		item.setBids(null);// It works, but how, is unexplainable
+		// Deleting from user table
+		user.getMybids().remove(item);
+		user.setMybids(user.getMybids());
+		
+		// Deleting from item table
+		item.getBids().remove(latestbid);
+		item.setBids(item.getBids());
 		
 		userRepository.save(user);
 		itemRepository.save(item);

@@ -8,9 +8,16 @@ export default class NewItemPage extends Component {
         name: '',
         age: '',
         bid: '',
-        description: ''
+        description: '',
+        image:null
     };
 }
+
+handleFileChange = (event) => {
+  const file = event.target.files[0];
+  this.setState({ image: file });
+  console.log(file)
+};
 
   handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
@@ -19,10 +26,18 @@ export default class NewItemPage extends Component {
   handleSubmit = (event)=>{
     event.preventDefault();
     const owner = JSON.parse(localStorage.getItem('user'));
-    const {name, age,bid, description} = this.state
+    const {name, age,bid, description,image} = this.state
             const itemData = {name, age,bid, description, owner}
             const confirmation = window.confirm('Are you sure with the details and want to save?')
             if(confirmation){
+              const formData = new FormData();
+              formData.append('file', image);
+              formData.append('name', name);
+
+              fetch('http://localhost:8080/uploadImage', {
+              method: 'POST',
+              body: formData,
+              })
             fetch('http://localhost:8080/saveItem', {
             method: 'POST',
             headers: {
@@ -75,16 +90,37 @@ export default class NewItemPage extends Component {
     </div>
   </div>
   <div className="col-md-3 mx-3">
-    <label htmlFor="validationCustomUsername" className="form-label">Choose an Image</label>
-    <div className="input-group has-validation">
-        <input type="text" className="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required/>
-        <div className="invalid-feedback">
-            Please choose a username.
-        </div>
-        <input type="file" className="form-control" id="fileInput" accept="image/png, image/jpeg" style={{ display: 'none' }} onChange={(e) => document.getElementById('validationCustomUsername').value = e.target.files[0].name}/>
-        <button className="btn btn-primary" onClick={() => document.getElementById('fileInput').click()}>Browse</button>
-    </div>
-</div>
+              <label htmlFor="fileInput" className="form-label">Choose an Image</label>
+              <div className="input-group has-validation">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="fileInputText"
+                  aria-describedby="inputGroupPrepend"
+                  readOnly
+                  required
+                />
+                <div className="invalid-feedback">Please choose an image.</div>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="fileInput"
+                  accept="image/png, image/jpeg"
+                  style={{ display: 'none' }}
+                  onChange={(e) => {
+                    document.getElementById('fileInputText').value = e.target.files[0].name;
+                    this.handleFileChange(e);
+                  }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => document.getElementById('fileInput').click()}
+                >
+                  Browse
+                </button>
+              </div>
+            </div>
 
   <div className="col-md-6 mx-auto" style={{alignItems:'center'}}>
     <label htmlfor="validationCustom03" className="form-label" >Description</label>

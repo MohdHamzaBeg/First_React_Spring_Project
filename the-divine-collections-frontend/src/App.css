@@ -99,3 +99,39 @@ td{
   background-color: #ADD8E6;
 }
 
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  width: 100%; /* Full width within its column */
+  max-width: 250px; /* Set a maximum width for the cards */
+  min-height: 200px; /* Ensure all cards have the same minimum height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Prevent overflow issues */
+  margin: 15px; /* Add horizontal margin for spacing */
+}
+
+.card-img-top {
+  width: 100%; /* Make the image take the full width of the card */
+  height: 200px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensure the image covers the area and maintains aspect ratio */
+}
+
+.card-body {
+  flex: 1; /* Ensure the card body takes up remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-text {
+  margin-bottom: 10px; /* Add some space between text and buttons */
+}
+
+.card .btn {
+  align-self: center; /* Center the button horizontally */
+}
+

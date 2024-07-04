@@ -3,6 +3,7 @@ package com.springframework.react.TheDivineCollections.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,8 +28,12 @@ public class UserController {
 	private final UserService userService;
 	
 	@PostMapping("/saveUser")
-	public void saveUser(@RequestBody User user) {
-		userService.saveUser(user);
+	public ResponseEntity<User> saveUser(@RequestBody User user) {
+		User savedUser = userService.saveUser(user);
+		if(savedUser==null)
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		else
+			return new ResponseEntity<>(HttpStatus.OK);
 	} // This method throws the internal server error but working properly because
 	// I am using another port for the view and springboot is unable to resolve that
 	// where is this view coming from

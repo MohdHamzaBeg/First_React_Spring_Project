@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	 User findByEmailAndPassword(String email, String password);
 	 
+	 User findByNumber(String number);
+	 
 	 @Query("SELECT b.id AS id, b.name AS name, b.age AS age, b.description AS description, b.bid AS bid " +
 	          "FROM User u JOIN u.mybids b WHERE u.id = :id")
 	 List<ItemProjection> findBidsByUserId(int id);

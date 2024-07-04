@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from "../images/a1.jpeg";
 
 export default class Item extends Component {
     constructor(props) {
@@ -8,7 +7,8 @@ export default class Item extends Component {
             item: {},
             showModal: false,
             newBid: '',
-            isBidValid: true
+            isBidValid: true,
+            itemImageSrc: null
         };
     }
 
@@ -27,11 +27,22 @@ export default class Item extends Component {
             .then(data => {
                 console.log(data);
                 this.setState({ item: data });
+                this.loadImage(data.name);
             })
             .catch(error => {
                 console.error('Error fetching items: ', error);
             });
     }
+
+    loadImage = (name) => {
+        import(`../images/${name}.jpeg`)
+            .then(image => {
+                this.setState({ itemImageSrc: image.default });
+            })
+            .catch(error => {
+                console.error('Error loading image: ', error);
+            });
+    };
 
     handleShowModal = () => {
         this.setState({ showModal: true });
@@ -50,7 +61,8 @@ export default class Item extends Component {
             isBidValid: newBid && parseFloat(newBid) >= lastBid * 1.5
         });
     };
-    updateBid = ()=>{
+
+    updateBid = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         fetch(`http://localhost:8080/updateBid/${user.id}/${this.state.item.id}/${this.state.newBid}`, {
             method: 'POST',
@@ -63,25 +75,24 @@ export default class Item extends Component {
                 throw new Error('Network response was not ok');
             }
         })
-        .then(()=> {
-            alert("Congratulations! Your Bid has been placed.")
-            this.setState({showModal:false})
+        .then(() => {
+            alert("Congratulations! Your Bid has been placed.");
+            this.setState({ showModal: false });
         })
         .catch(error => {
             console.error('Error adding bid: ', error);
         });
     };
 
-
     render() {
-        const { item, showModal, newBid, isBidValid } = this.state;
+        const { item, showModal, newBid, isBidValid, itemImageSrc } = this.state;
 
         return (
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="item-container">
-                            <img src={logo} className="item-image" alt="Item" />
+                            {itemImageSrc && <img src={itemImageSrc} className="item-image" alt="Item" />}
                             <div className="item-details">
                                 <h1 className="item-title">{item.name}</h1>
                                 <p className="item-description">{item.description}</p>

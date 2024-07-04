@@ -8,7 +8,7 @@ import com.springframework.react.TheDivineCollections.model.User;
 import com.springframework.react.TheDivineCollections.projection.ItemProjection;
 
 public interface UserService {
-	void saveUser(User user);
+	User saveUser(User user);
 	
 	User getUserbyId(String email, String password);
 	

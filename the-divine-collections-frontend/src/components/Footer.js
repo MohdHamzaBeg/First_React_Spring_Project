@@ -11,17 +11,17 @@ export default class Footer extends Component {
                             <Link to="/privacy-policy" className="text-white mx-2">Privacy Policy</Link> | 
                             <Link to="/terms-of-service" className="text-white mx-2">Terms of Service</Link>
                         </p>
-                        <p>Contact: <a href="mailto:hamzabeg12june@gmail.com" className="text-white">hamzabeg12june@gmail.com</a></p>
+                        <p>Contact: <Link href="mailto:hamzabeg12june@gmail.com" className="text-white">hamzabeg12june@gmail.com</Link></p>
                         <p>
-                            <a href="https://www.linkedin.com/in/mohd-hamza-beg-2a760024a" target="_blank" rel="noopener noreferrer">
+                            <Link href="https://www.linkedin.com/in/mohd-hamza-beg-2a760024a" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-linkedin mx-2" style={{ fontSize: '1.5rem' }}></i>
-                            </a>
-                            <a href="https://www.instagram.com/__mirzaaa_/" target="_blank" rel="noopener noreferrer">
+                            </Link>
+                            <Link href="https://www.instagram.com/__mirzaaa_/" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-instagram mx-2" style={{ fontSize: '1.5rem' }}></i>
-                            </a>
-                            <a href="https://github.com/MohdHamzaBeg" target="_blank" rel="noopener noreferrer">
+                            </Link>
+                            <Link href="https://github.com/MohdHamzaBeg" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-github mx-2" style={{ fontSize: '1.5rem' }}></i>
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </footer>

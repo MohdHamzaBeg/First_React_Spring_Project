@@ -8,9 +8,20 @@ export default class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      logos:{}
     };
 }
+
+loadImage = async (name) => {
+  try {
+    const image = await import(`../images/${name}.jpeg`);
+    return image.default;
+  } catch (error) {
+    console.error('Error loading image: ', error);
+    return '../images/default.jpeg'; // Fallback to a default image if the specified image is not found
+  }
+};
     componentDidMount() {
 
       fetch('http://localhost:8080/allitems')
@@ -20,9 +31,13 @@ export default class Categories extends Component {
                 }
                 return response.json();
             })
-            .then(data => {
+            .then(async(data) => {
+              const logos = {};
+             for (let item of data) {
+              logos[item.id] = await this.loadImage(item.name);
+        }
               console.log(data)
-                this.setState({ items: data });
+                this.setState({ items: data, logos });
             })
             .catch(error => {
                 console.error('Error fetching items: ', error);
@@ -30,7 +45,8 @@ export default class Categories extends Component {
       }
 
 
-  render() { 
+  render() {
+    const{logos} = this.state
     return (
         <>
         <h3 className='display-6 my-3'> Categories:-</h3>
@@ -50,6 +66,12 @@ export default class Categories extends Component {
     .map(item => (
       <div className="col-md-3 mb-4" key={item.id}>
         <div className="card mx-3 my-3">
+                  <img
+                    src={logos[item.id]}
+                    className="card-img-top"
+                    alt={item.name}
+                    onError={(e) => e.target.src = '../images/default.jpeg'} // Fallback to default image on error
+                  />
           <div className="card-body" style={{ backgroundColor: '#ADD8E6' }}>
             <h5 className="card-title">{item.name}</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} BC</h6>
@@ -79,6 +101,12 @@ export default class Categories extends Component {
     .map(item => (
       <div className="col-md-3 mb-4" key={item.id}>
         <div className="card mx-3 my-3">
+                  <img
+                    src={logos[item.id]}
+                    className="card-img-top"
+                    alt={item.name}
+                    onError={(e) => e.target.src = '../images/default.jpeg'} // Fallback to default image on error
+                  />
           <div className="card-body" style={{ backgroundColor: '#ADD8E6' }}>
             <h5 className="card-title">{item.name}</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} BC</h6>
@@ -106,6 +134,12 @@ export default class Categories extends Component {
     .map(item => (
       <div className="col-md-3 mb-4" key={item.id}>
         <div className="card mx-3 my-3">
+                  <img
+                    src={logos[item.id]}
+                    className="card-img-top"
+                    alt={item.name}
+                    onError={(e) => e.target.src = '../images/default.jpeg'} // Fallback to default image on error
+                  />
           <div className="card-body" style={{ backgroundColor: '#ADD8E6' }}>
             <h5 className="card-title">{item.name}</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">{item.age} BC</h6>
