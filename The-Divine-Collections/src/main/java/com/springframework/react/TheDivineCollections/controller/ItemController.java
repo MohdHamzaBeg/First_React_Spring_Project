@@ -76,14 +76,12 @@ public class ItemController {
             if (file.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
             }
-
-            // Create the directory if it doesn't exist
+            
             File directory = new File(uploadDir);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
 
-            // Save the file to the specified directory with the name of the item
             File dest = new File(directory, name + ".jpeg");
             file.transferTo(dest);
 

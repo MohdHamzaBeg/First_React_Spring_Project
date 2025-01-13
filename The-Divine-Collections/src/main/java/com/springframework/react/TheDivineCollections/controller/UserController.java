@@ -65,7 +65,7 @@ public class UserController {
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	@GetMapping("/deleteuserBid/{itemid}/{userid}")
+	@DeleteMapping("/deleteuserBid/{itemid}/{userid}") // Got some issues
 	public ResponseEntity<Item> removeUserBid(@PathVariable("itemid") int itemid,
     									  	 @PathVariable("userid") int userid){
 		try {
